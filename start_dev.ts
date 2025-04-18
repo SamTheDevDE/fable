@@ -18,7 +18,7 @@ if (import.meta.main) {
   const isRemote = Deno.args.includes('--remote');
 
   if (!isRemote) {
-    await startMongod();
+    await setupMongo();
     await sleep(500);
     await ensureIndexes();
   } else {
@@ -26,22 +26,16 @@ if (import.meta.main) {
   }
 
   await start();
-
   await tunnel();
 }
 
-async function startMongod() {
-  mongod = await MongoMemoryReplSet.create({
-    replSet: { storageEngine: 'ephemeralForTest' },
-  });
+async function setupMongo() {
+  const uri = 'mongodb://admin:admin@116.203.233.86:5911/?authSource=admin';
 
-  const uri = mongod.getUri();
-
-  console.log(green(uri));
+  console.log(green(`Connected MongoDB URI: ${uri}`));
 
   Deno.env.set('MONGO_URI', uri);
 }
-
 async function tunnel() {
   try {
     const maxAttempts = 5;
