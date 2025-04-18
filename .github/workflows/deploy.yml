@@ -33,7 +33,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "fable-bot-57492"
-          entrypoint: "interactions.ts"
+          entrypoint: "src/interactions.ts"
           root: ""
           
           
