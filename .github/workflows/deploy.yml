@@ -24,7 +24,10 @@ jobs:
           deno-version: v2.x
 
       - name: Build step
-        run: "deno task discord"
+        run: deno task discord
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
