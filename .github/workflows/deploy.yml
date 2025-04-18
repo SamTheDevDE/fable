@@ -35,3 +35,4 @@ jobs:
           project: "fable-bot-57492"
           entrypoint: "src/interactions.ts"
           root: ""
+          token: ${{ secrets.DENO_DEPLOY_TOKEN }} # Add this line
